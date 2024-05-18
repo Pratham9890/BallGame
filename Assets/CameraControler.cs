@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraControler : MonoBehaviour
+{
+    public GameObject player;
+    private bool keyAlreadyPressed = false;
+    private bool keyAlreadyPressed1 = false;
+
+    private Vector3 offset;    // Start is called before the first frame update
+    void Start()
+    {
+        offset = transform.position - player.transform.position;
+    }
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        transform.position = player.transform.position + offset;
+        
+        if (Input.GetKeyDown("left") && !keyAlreadyPressed)
+        {
+            keyAlreadyPressed = true;
+            this.transform.Rotate(0f,-90f,0f);
+        }
+        if (Input.GetKeyUp("left"))
+        {
+            keyAlreadyPressed = false;
+        }
+        if (Input.GetKeyDown("right") && !keyAlreadyPressed1)
+        {
+            keyAlreadyPressed1 = true;
+            this.transform.Rotate(0f,90f,0f);
+        }
+        if (Input.GetKeyUp("right"))
+        {
+            keyAlreadyPressed1 = false;
+        }
+    }
+}
