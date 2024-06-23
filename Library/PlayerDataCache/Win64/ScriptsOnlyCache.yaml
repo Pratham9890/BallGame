@@ -44,9 +44,9 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 23018}
+      Script: {instanceID: 5368}
     - Class: 114
-      Script: {instanceID: 23728}
+      Script: {instanceID: 7714}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 135
@@ -606,6 +606,12 @@ ScriptsOnlyBuild:
     className: StateGraphAsset
   - hash:
       serializedVersion: 2
+      Hash: 44920e9a2376e725dcc103a49a24755c
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: CameraControler
+  - hash:
+      serializedVersion: 2
       Hash: 540882762544409cc4530e60db00e951
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
@@ -870,6 +876,12 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   - hash:
       serializedVersion: 2
+      Hash: 3501b621f87e10895def56cd01db7406
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: playercontroller
+  - hash:
+      serializedVersion: 2
       Hash: 00eef92bf387da2c9009267123d9d674
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -880,18 +892,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
-  - hash:
-      serializedVersion: 2
-      Hash: da55a91be45b2166ee467cf57d8f27de
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: playercontroller
-  - hash:
-      serializedVersion: 2
-      Hash: 44920e9a2376e725dcc103a49a24755c
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: CameraControler
   platform: 19
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
