@@ -1,41 +1,59 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class CameraControler : MonoBehaviour
 {
     public GameObject player;
-    private bool keyAlreadyPressed = false;
-    private bool keyAlreadyPressed1 = false;
+    public float rotationDuration = 1f; // Duration of the rotation in seconds
 
-    private Vector3 offset;    // Start is called before the first frame update
+    private Vector3 offset;
+    private Coroutine rotationCoroutine;
+
     void Start()
     {
         offset = transform.position - player.transform.position;
     }
 
-    // Update is called once per frame
     void LateUpdate()
     {
         transform.position = player.transform.position + offset;
-        
-        if (Input.GetKeyDown("left") && !keyAlreadyPressed)
+
+        // Left rotation
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            keyAlreadyPressed = true;
-            this.transform.Rotate(0f,-90f,0f);
+            if (rotationCoroutine != null)
+            {
+                StopCoroutine(rotationCoroutine);
+            }
+            rotationCoroutine = StartCoroutine(SmoothSnapRotate(-90));
         }
-        if (Input.GetKeyUp("left"))
+
+        // Right rotation
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            keyAlreadyPressed = false;
+            if (rotationCoroutine != null)
+            {
+                StopCoroutine(rotationCoroutine);
+            }
+            rotationCoroutine = StartCoroutine(SmoothSnapRotate(90));
         }
-        if (Input.GetKeyDown("right") && !keyAlreadyPressed1)
+    }
+
+    private IEnumerator SmoothSnapRotate(float angle)
+    {
+        float startRotation = transform.eulerAngles.y;
+        float endRotation = Mathf.Round((startRotation + angle) / 90f) * 90f;
+        float t = 0.0f;
+
+        while (t < rotationDuration)
         {
-            keyAlreadyPressed1 = true;
-            this.transform.Rotate(0f,90f,0f);
+            t += Time.deltaTime;
+            float smoothStep = Mathf.Sin(t / rotationDuration * Mathf.PI * 0.5f); // Ease-in and ease-out
+            float yRotation = Mathf.Lerp(startRotation, endRotation, smoothStep) % 360.0f;
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, yRotation, transform.eulerAngles.z);
+            yield return null;
         }
-        if (Input.GetKeyUp("right"))
-        {
-            keyAlreadyPressed1 = false;
-        }
+
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, endRotation % 360.0f, transform.eulerAngles.z);
     }
 }
